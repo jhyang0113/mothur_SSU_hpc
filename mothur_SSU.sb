@@ -1,0 +1,24 @@
+#!/bin/bash --login
+########## Define Resources Needed with SBATCH Lines ##########
+
+#SBATCH --time=160:00:00   # limit of wall clock time - how long the job will run
+#SBATCH --ntasks=1       # number of tasks - how many tasks (nodes) that you require
+#SBATCH --cpus-per-task=16  # number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem=160G      # memory required per node - amount of memory (in bytes)
+#SBATCH --job-name mothur_SSU   # you can give your job a name for easier identification
+#SBATCH --account shadeash-colej           # give a running priority for your job
+#SBATCH --mail-user=jihoonyang0113@gmail.com  # enter your email address
+#SBATCH --mail-type=BEGIN,END,FAIL  # will receive an email when job starts, ends, fails
+
+########## Command Lines to Run ##########
+
+### load necessary modules, e.g.
+
+### change to the directory where your code is located
+cd /mnt/scratch/f0008425/SSU
+
+### call your executable
+/mnt/scratch/f0008425/mothur/mothur-1.46.1/mothur stability.batch
+
+
+scontrol show job $SLURM_JOB_ID     ### write job information to output file
